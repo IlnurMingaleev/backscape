@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
 
-public class IsometricPlayerController : MonoBehaviour
+public class IsometricPlayerController : NetworkBehaviour
 {
     [SerializeField] private Animator animator;
     [SerializeField] private Transform playerBody;
@@ -25,7 +26,10 @@ public class IsometricPlayerController : MonoBehaviour
     private float nextFootstep = 0;
 
     private Vector3 input;
-
+    /*public override void OnNetworkSpawn() 
+    {
+        
+    }*/
     private void Start()
     {
         //newRotation = playerBody.rotation;
@@ -34,6 +38,10 @@ public class IsometricPlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!IsLocalPlayer)
+        {
+            return;
+        }
         GatherInput();
         CheckIsGrounded();
         Move();
