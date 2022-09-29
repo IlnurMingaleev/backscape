@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Unity.Netcode;
+using UnityEngine.InputSystem;
+using FishNet.Object;
 
-
-public class IsometricPlayerController : NetworkBehaviour
+[RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(PlayerInput))]
+public class IsometricPlayerController : MonoBehaviour
 {
     [SerializeField] private Animator animator;
     [SerializeField] private Transform playerBody;
@@ -12,7 +14,7 @@ public class IsometricPlayerController : NetworkBehaviour
     public float speed = 8f;
     public float gravity = -9.81f;
     public float jumpHeight = 3f;
-    public Transform groundCheck;
+    public Transform groundCheckObj;
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
     private Vector3 velocity;
@@ -26,10 +28,6 @@ public class IsometricPlayerController : NetworkBehaviour
     private float nextFootstep = 0;
 
     private Vector3 input;
-    /*public override void OnNetworkSpawn() 
-    {
-        
-    }*/
     private void Start()
     {
         //newRotation = playerBody.rotation;
@@ -38,10 +36,6 @@ public class IsometricPlayerController : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!IsLocalPlayer)
-        {
-            return;
-        }
         GatherInput();
         CheckIsGrounded();
         Move();
@@ -103,7 +97,7 @@ public class IsometricPlayerController : NetworkBehaviour
     }
     private void CheckIsGrounded() 
     {
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        isGrounded = Physics.CheckSphere(groundCheckObj.position, groundDistance, groundMask);
 
         if (isGrounded && velocity.y < 0)
         {
