@@ -36,15 +36,12 @@ public class CameraController : NetworkBehaviour
             CinemachineVirtualCamera virtualCam = cam.GetComponent<CinemachineVirtualCamera>();
             virtualCam.Follow = transform;
             virtualCam.LookAt = transform;*/
-            Camera camera = gameObject.transform.GetChild(0).GetComponent<Camera>();
+            //Camera camera = gameObject.transform.GetChild(0).GetComponent<Camera>();
             //cursorController.SetCamera(camera);
             //Debug.Log(camera);
             //RaiseOnCameraActivate(camera);
             //OnCameraActivate += cursorController.CameraController_OnCameraActivate;
-            if (OnCameraActivate != null) 
-            {
-                Debug.Log("Event is not null");
-            }
+           
             //OnCameraActivate?.Invoke(this, new OnCameraActivateEventArgs { cam = camera });
             
         }

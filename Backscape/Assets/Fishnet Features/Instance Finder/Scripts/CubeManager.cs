@@ -12,12 +12,21 @@ public class CubeManager : MonoBehaviour
     [SerializeField] private List<Material> matList = new List<Material>();
     [SerializeField] private GameObject cubePrefab;
 
-    private MeshRenderer meshRenderer;
+    private GameObject sceneCube;
     private bool isCubeOnScene;
+
+    private void Awake()
+    {
+        CursorController.OnMouseClick += CursorController_OnMouseClick;
+    }
+
+    private void CursorController_OnMouseClick(GameObject obj)
+    {
+        SetActiveCube(obj);
+    }
 
     private void Start()
     {
-        meshRenderer = GetComponent<MeshRenderer>();
         isCubeOnScene = false;
         //player.OnCollisionDestroy += DespawnCube;
     }
@@ -26,20 +35,25 @@ public class CubeManager : MonoBehaviour
     #region UnityEventCallbacks
     public void OnMKeyPress(InputAction.CallbackContext context) 
     {
-        if (context.started || context.performed) 
+        if (context.performed && (sceneCube != null)) 
         {
-            ApplyRandomMaterial();
+            ApplyRandomMaterial(sceneCube);
 
         }
     }
 
     public void OnSevenKeyPress(InputAction.CallbackContext context) 
     {
-        if (context.started || context.performed)
+        if ( context.performed)
         {
             if (!isCubeOnScene)
             {
                 SpawnCube();
+                isCubeOnScene = true;
+            }
+            else 
+            {
+                DespawnCube(sceneCube);
             }
 
         }
@@ -49,9 +63,10 @@ public class CubeManager : MonoBehaviour
 
     #region RandomMaterialMethod
 
-    private void ApplyRandomMaterial() 
+    private void ApplyRandomMaterial(GameObject cubeObj) 
     {
         var randomIndex = Random.Range(0, 3);
+        MeshRenderer meshRenderer = cubeObj.GetComponent<MeshRenderer>();
         meshRenderer.material = matList[randomIndex];
     }
     #endregion
@@ -60,9 +75,8 @@ public class CubeManager : MonoBehaviour
 
     private void SpawnCube()  
     {
-        GameObject sceneCube = Instantiate(cubePrefab);
-        InstanceFinder.ServerManager.Spawn(sceneCube);
-        isCubeOnScene = true;
+        GameObject cube = Instantiate(cubePrefab);
+        InstanceFinder.ServerManager.Spawn(cube);
     }
 
     public void DespawnCube(GameObject gameObject) 
@@ -73,4 +87,8 @@ public class CubeManager : MonoBehaviour
     }
     #endregion
 
+    private void SetActiveCube(GameObject cubeObj) 
+    {
+        sceneCube = cubeObj;
+    }
 }

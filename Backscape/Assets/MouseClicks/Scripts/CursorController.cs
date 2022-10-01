@@ -15,6 +15,8 @@ public class CursorController : MonoBehaviour
     private CursorControls controls;
     private Camera mainCamera;
 
+    public static event Action<GameObject> OnMouseClick;
+
 
 
     private void Awake()
@@ -49,17 +51,17 @@ public class CursorController : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        controls.Mouse.Click.started += _ => StartedClick();
-        controls.Mouse.Click.performed += _ => EndedClick();
+        controls.Mouse.Click.started += _ => StartedLeftClick();
+        controls.Mouse.Click.performed += _ => EndedLeftClick();
         
     }
 
-    private void StartedClick() 
+    private void StartedLeftClick() 
     {
         ChangeCursor(cursorClicked);
     }
 
-    private void EndedClick() 
+    private void EndedLeftClick() 
     {
         ChangeCursor(cursor);
         DetectObject();
@@ -74,10 +76,12 @@ public class CursorController : MonoBehaviour
              RaycastHit hit;
              if (Physics.Raycast(ray, out hit))
              {
-                 Debug.Log("We are in raycast");
+                 //Debug.Log("We are in raycast");
                  if (hit.collider.CompareTag("Cube"))
                  {
-                     Debug.Log("3D Hit: " + hit.collider.tag);
+                    //Debug.Log("3D Hit: " + hit.collider.tag);
+                    OnMouseClick?.Invoke(hit.collider.gameObject);
+                    //Debug.Log(hit.collider.gameObject);
 
                  }
              }
