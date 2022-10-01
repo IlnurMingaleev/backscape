@@ -1,0 +1,54 @@
+{
+    "name": "Cube Controls",
+    "maps": [
+        {
+            "name": "Cube",
+            "id": "151ad5b2-ac1f-4c1c-ac64-df4ab2bb3788",
+            "actions": [
+                {
+                    "name": "ChangeMaterial",
+                    "type": "Button",
+                    "id": "eca31543-4196-44ac-a008-f1e43ae7e282",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Spawn/Despawn",
+                    "type": "Button",
+                    "id": "1392d144-a4cd-44c8-9893-f1f8e2f8fc57",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "23f42f22-dbe3-4510-984d-dfa9cf9ec681",
+                    "path": "<Keyboard>/m",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChangeMaterial",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "474772a0-0a00-42b1-8e46-54cbad4a3d4a",
+                    "path": "<Keyboard>/numpad7",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Spawn/Despawn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

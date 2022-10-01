@@ -1,8 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FishNet.Object;
+using System;
+using Cinemachine;
 
-public class CameraController : MonoBehaviour
+public class CameraController : NetworkBehaviour
 {
     private Quaternion newRotation;
     private Vector3 newZoom;
@@ -11,7 +14,43 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float rotationAmount;
     [SerializeField] private float movementTime;
 
-    [SerializeField] Transform cameraTransform;
+    [SerializeField] private Transform cameraTransform;
+
+ 
+   public event EventHandler<OnCameraActivateEventArgs> OnCameraActivate;
+
+   public class OnCameraActivateEventArgs : EventArgs 
+   {
+        public Camera cam;
+
+   }
+
+    public override void OnStartClient()
+    {
+        base.OnStartClient();
+        if (base.IsOwner) 
+        {
+            gameObject.SetActive(true);
+            /*Camera cam = Camera.main;
+            cameraTransform = cam.transform;
+            CinemachineVirtualCamera virtualCam = cam.GetComponent<CinemachineVirtualCamera>();
+            virtualCam.Follow = transform;
+            virtualCam.LookAt = transform;*/
+            Camera camera = gameObject.transform.GetChild(0).GetComponent<Camera>();
+            //cursorController.SetCamera(camera);
+            //Debug.Log(camera);
+            //RaiseOnCameraActivate(camera);
+            //OnCameraActivate += cursorController.CameraController_OnCameraActivate;
+            if (OnCameraActivate != null) 
+            {
+                Debug.Log("Event is not null");
+            }
+            //OnCameraActivate?.Invoke(this, new OnCameraActivateEventArgs { cam = camera });
+            
+        }
+    }
+
+    
     // Start is called before the first frame update
     void Start()
     {
