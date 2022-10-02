@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5693185088843269334}
   - component: {fileID: 5693185088843269335}
   - component: {fileID: 2740461915089579297}
+  - component: {fileID: 8309938900117557157}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Cube
@@ -33,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5693185088843269333
 MeshFilter:
@@ -112,7 +113,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <IsNested>k__BackingField: 0
   <ComponentIndex>k__BackingField: 0
-  _networkBehaviours: []
+  _networkBehaviours:
+  - {fileID: 8309938900117557157}
   <ParentNetworkObject>k__BackingField: {fileID: 0}
   <ChildNetworkObjects>k__BackingField: []
   _isNetworked: 1
@@ -120,7 +122,26 @@ MonoBehaviour:
   _disableOnDespawn: 0
   NetworkObserver: {fileID: 0}
   <PrefabId>k__BackingField: 4
-  _scenePathHash: 0
+  _scenePathHash: 1598277697
   <SceneId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 12899653097304502401
-  _sceneNetworkObjects: []
+  _sceneNetworkObjects:
+  - {fileID: 2740461915089579297}
+  - {fileID: 0}
+  - {fileID: 0}
+--- !u!114 &8309938900117557157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5693185088843269328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 912ebf32bc0f47c468affb4b6423aebb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 0
+  _addedNetworkObject: {fileID: 2740461915089579297}
+  _networkObjectCache: {fileID: 2740461915089579297}
+  g_cubeColor: {r: 0, g: 0, b: 0, a: 0}

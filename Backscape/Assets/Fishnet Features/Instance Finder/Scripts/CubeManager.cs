@@ -3,17 +3,37 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using FishNet;
+using FishNet.Object;
 
 
 [RequireComponent(typeof(PlayerInput))]
-public class CubeManager : MonoBehaviour
+public class CubeManager : NetworkBehaviour
 {
 
-    [SerializeField] private List<Material> matList = new List<Material>();
+    //[SerializeField] private List<Material> matList = new List<Material>();
     [SerializeField] private GameObject cubePrefab;
 
     private GameObject sceneCube;
-    private bool isCubeOnScene;
+    private bool cubeOnScene;
+    
+    /*
+        #region Types.
+
+        public struct MaterialData 
+        {
+            public Material material;
+        }
+
+        public struct ReconcileMatData
+        {
+            public Material Material;
+
+            public ReconcileMatData( Material newMaterial )
+            {
+                Material = newMaterial;
+            }
+        }
+        #endregion*/
 
     private void Awake()
     {
@@ -27,7 +47,7 @@ public class CubeManager : MonoBehaviour
 
     private void Start()
     {
-        isCubeOnScene = false;
+        cubeOnScene = false;
         //player.OnCollisionDestroy += DespawnCube;
     }
 
@@ -37,7 +57,7 @@ public class CubeManager : MonoBehaviour
     {
         if (context.performed && (sceneCube != null)) 
         {
-            ApplyRandomMaterial(sceneCube);
+            ApplyRandomColor(sceneCube);
 
         }
     }
@@ -46,10 +66,10 @@ public class CubeManager : MonoBehaviour
     {
         if ( context.performed)
         {
-            if (!isCubeOnScene)
+            if (!cubeOnScene)
             {
                 SpawnCube();
-                isCubeOnScene = true;
+                
             }
             else 
             {
@@ -63,11 +83,10 @@ public class CubeManager : MonoBehaviour
 
     #region RandomMaterialMethod
 
-    private void ApplyRandomMaterial(GameObject cubeObj) 
+    private void ApplyRandomColor(GameObject cubeObj) 
     {
         var randomIndex = Random.Range(0, 3);
-        MeshRenderer meshRenderer = cubeObj.GetComponent<MeshRenderer>();
-        meshRenderer.material = matList[randomIndex];
+        cubeObj.GetComponent<CubeProperties>().g_cubeColor = SingletonColors.Instance.colors[randomIndex];
     }
     #endregion
 
@@ -77,12 +96,13 @@ public class CubeManager : MonoBehaviour
     {
         GameObject cube = Instantiate(cubePrefab);
         InstanceFinder.ServerManager.Spawn(cube);
+        cubeOnScene = true;
     }
 
     public void DespawnCube(GameObject gameObject) 
     {
         InstanceFinder.ServerManager.Despawn(gameObject);
-        isCubeOnScene = false;
+        cubeOnScene = false;
     
     }
     #endregion

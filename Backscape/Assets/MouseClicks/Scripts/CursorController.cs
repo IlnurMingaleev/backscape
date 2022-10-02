@@ -81,7 +81,7 @@ public class CursorController : MonoBehaviour
                  {
                     //Debug.Log("3D Hit: " + hit.collider.tag);
                     OnMouseClick?.Invoke(hit.collider.gameObject);
-                    //Debug.Log(hit.collider.gameObject);
+                    Debug.Log(hit.collider.gameObject);
 
                  }
              }
