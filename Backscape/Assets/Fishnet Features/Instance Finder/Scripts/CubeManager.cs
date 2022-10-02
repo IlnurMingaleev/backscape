@@ -86,7 +86,8 @@ public class CubeManager : NetworkBehaviour
     private void ApplyRandomColor(GameObject cubeObj) 
     {
         var randomIndex = Random.Range(0, 3);
-        cubeObj.GetComponent<CubeProperties>().g_cubeColor = SingletonColors.Instance.colors[randomIndex];
+        //cubeObj.GetComponent<CubeProperties>().g_CubeColor = SingletonColors.Instance.colors[randomIndex];
+        cubeObj.GetComponent<CubeProperties>().g_cubeMaterial = SingletonColors.Instance.matList[randomIndex];
     }
     #endregion
 

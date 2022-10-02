@@ -12433,6 +12433,11 @@ MonoBehaviour:
   - {r: 1, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 1, a: 1}
   - {r: 0, g: 1, b: 0, a: 1}
+  matList:
+  - {fileID: 2100000, guid: 2fb64a6d6b0271c4c93ad374ad284115, type: 2}
+  - {fileID: 2100000, guid: b0be06830334f444f92f9448915e10bc, type: 2}
+  - {fileID: 2100000, guid: 7e1ca7ac0f9285a4084c54096bd0542c, type: 2}
+  materialPrefab: {fileID: 6086469354490537429, guid: cef6cee1a50103d4da9ba97eaa174ec9, type: 3}
 --- !u!4 &503426513
 Transform:
   m_ObjectHideFlags: 0
@@ -19850,6 +19855,7 @@ MonoBehaviour:
   <SceneId>k__BackingField: 6864550442681104442
   <AssetPathHash>k__BackingField: 0
   _sceneNetworkObjects:
+  - {fileID: 0}
   - {fileID: 803235739}
   - {fileID: 1333144906}
 --- !u!114 &803235740
@@ -32954,6 +32960,7 @@ MonoBehaviour:
   <SceneId>k__BackingField: 6864550440993908680
   <AssetPathHash>k__BackingField: 0
   _sceneNetworkObjects:
+  - {fileID: 0}
   - {fileID: 803235739}
   - {fileID: 1333144906}
 --- !u!1 &1335519886
