@@ -14,8 +14,8 @@ public static class MaterialSerilizer
 {
 
    //Write each axis of a Material.
-    public static void WriteMaterial(this Writer writer, Material value)
-    {
+   // public static void WriteMaterial(this Writer writer, Material value)
+   // {
     //    writer.WriteColor(value.color);
     //    writer.WriteBoolean(value.doubleSidedGI);
     //    writer.WriteArray<LocalKeyword>(value.enabledKeywords);
@@ -26,15 +26,15 @@ public static class MaterialSerilizer
     //    writer.Write<Vector2>(value.mainTextureScale);
     //    writer.Write<int>(value.passCount);
     //    writer.Write<int>(value.renderQueue);
-       writer.Write<Shader>(value.shader);
+    //   writer.Write<Shader>(value.shader);
     //    writer.WriteArray<string>(value.shaderKeywords);
 
-    }
+   // }
 
     ////Read and return a Material.
-    public static Material ReadMaterial(this Reader reader)
-    {
-        return new Material(reader.Read<Shader>()) { };
+    //public static Material ReadMaterial(this Reader reader)
+    //{
+     //   return new Material(reader.Read<Shader>()) { };
     //    {
     //        color = reader.ReadColor(),
     //        doubleSidedGI = reader.ReadBoolean(),
@@ -47,7 +47,7 @@ public static class MaterialSerilizer
     //        renderQueue = reader.Read<int>(),
     //        shaderKeywords = reader.ReadArrayAllocated<string>()
     //    }; 
-    }
+    //}
 
     //public static void WriteMaterial(this Writer writer, Material value) 
     //{
@@ -69,12 +69,12 @@ public static class MaterialSerilizer
 
 public class CubeProperties : NetworkBehaviour
 {
-    //[SyncVar(Channel = Channel.Unreliable, OnChange = nameof(OnMaterialChange))]
-    //private Color g_cubeColor;
-
     [SyncVar(Channel = Channel.Unreliable, OnChange = nameof(OnMaterialChange))]
-    public Material g_cubeMaterial;
-     /*public Color g_CubeColor 
+    private Color g_cubeColor;
+
+    //[SyncVar(Channel = Channel.Unreliable, OnChange = nameof(OnMaterialChange))]
+    //public Material g_cubeMaterial;
+     public Color g_CubeColor 
      {
          get 
          {
@@ -85,19 +85,19 @@ public class CubeProperties : NetworkBehaviour
          {
              g_cubeColor = value;
          }
-     }*/
+     }
 
-     /*private void OnMaterialChange(Color prev, Color next, bool asServer) 
+     private void OnMaterialChange(Color prev, Color next, bool asServer) 
      {
          if (!asServer)
              GetComponent<MeshRenderer>().material.color = next;
-     }*/
+     }
 
-    private void OnMaterialChange(Material prev, Material next, bool asServer) 
+    /*private void OnMaterialChange(Material prev, Material next, bool asServer) 
     {
         if (!asServer)
             GetComponent<MeshRenderer>().material = next;
-    }
+    }*/
 
 
 
