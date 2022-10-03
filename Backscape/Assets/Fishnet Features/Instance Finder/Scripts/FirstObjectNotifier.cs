@@ -1,10 +1,12 @@
 using UnityEngine;
 using System;
 using FishNet.Object;
-
+using TMPro;
 public class FirstObjectNotifier : NetworkBehaviour
 {
     public static event Action<Camera> OnFirstObjectSpawned;
+
+
 
     [SerializeField] private Camera cam;
     public override void OnStartClient()
@@ -13,8 +15,12 @@ public class FirstObjectNotifier : NetworkBehaviour
         if (base.IsOwner) 
         {
             NetworkObject networkObject = base.LocalConnection.FirstObject;
-            if (networkObject == base.NetworkObject)
+            if (networkObject == base.NetworkObject) 
+            {
                 OnFirstObjectSpawned?.Invoke(cam);
+                
+            }
+                
         }
     }
 }

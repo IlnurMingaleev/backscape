@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using FishNet.Object;
-
+using TMPro;
 public class CursorController : MonoBehaviour
 {
     [SerializeField] private Texture2D cursor;
