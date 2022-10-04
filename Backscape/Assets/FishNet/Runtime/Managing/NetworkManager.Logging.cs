@@ -118,7 +118,6 @@ namespace FishNet.Managing
                 prefix = ERROR_LOGGING_PREFIX;
             else
                 prefix = string.Empty;
-
         }
     }
 
