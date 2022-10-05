@@ -1013,6 +1013,8 @@ MonoBehaviour:
   <SceneId>k__BackingField: 6864550440107970198
   <AssetPathHash>k__BackingField: 0
   _sceneNetworkObjects:
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 25367662}
   - {fileID: 583284496}
   - {fileID: 803235739}
@@ -14564,6 +14566,8 @@ MonoBehaviour:
   <SceneId>k__BackingField: 6864550439532762937
   <AssetPathHash>k__BackingField: 0
   _sceneNetworkObjects:
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 25367662}
   - {fileID: 583284496}
   - {fileID: 803235739}
@@ -20243,6 +20247,8 @@ MonoBehaviour:
   <SceneId>k__BackingField: 6864550442681104442
   <AssetPathHash>k__BackingField: 0
   _sceneNetworkObjects:
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 25367662}
   - {fileID: 583284496}
   - {fileID: 803235739}
@@ -33350,6 +33356,8 @@ MonoBehaviour:
   <SceneId>k__BackingField: 6864550440993908680
   <AssetPathHash>k__BackingField: 0
   _sceneNetworkObjects:
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 25367662}
   - {fileID: 583284496}
   - {fileID: 803235739}
@@ -48064,6 +48072,8 @@ MonoBehaviour:
   <SceneId>k__BackingField: 6864550441185575700
   <AssetPathHash>k__BackingField: 0
   _sceneNetworkObjects:
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 25367662}
   - {fileID: 583284496}
   - {fileID: 803235739}

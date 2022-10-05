@@ -3,6 +3,7 @@ using FishNet.Object;
 using FishNet.Object.Prediction;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System;
 
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(PlayerInput))]
@@ -16,6 +17,9 @@ public class PlayerInputDriver : NetworkBehaviour
     [SerializeField] public float jumpSpeed = 6f;
     [SerializeField] public float speed = 8f;
     [SerializeField] public float gravity = -9.8f;
+    [SerializeField] private LayerMask _groundMask;
+
+    public static event Action<Vector2> OnGatherInput;
 
     #region Types.
 
@@ -30,12 +34,10 @@ public class PlayerInputDriver : NetworkBehaviour
     {
         public Vector3 Position;
         public Quaternion Rotation;
-        public Quaternion PlayerBodyRot;
         public ReconcileData(Vector3 position, Quaternion rotation, Quaternion playerBodyRot)
         {
             Position = position;
             Rotation = rotation;
-            PlayerBodyRot = playerBodyRot;
 
         }
     }
@@ -88,9 +90,6 @@ public class PlayerInputDriver : NetworkBehaviour
         move.y += gravity * (float)base.TimeManager.TickDelta; // gravity is negative...
         _characterController.Move(move * speed * (float)base.TimeManager.TickDelta);
 
-
-        // Here I call method for character body rotation
-        Look(_moveInput);
     }
 
     [Reconcile]
@@ -98,7 +97,6 @@ public class PlayerInputDriver : NetworkBehaviour
     {
         transform.position = rd.Position;
         transform.rotation = rd.Rotation;
-        playerBody.rotation = rd.PlayerBodyRot;
     }
 
     #endregion
@@ -110,9 +108,11 @@ public class PlayerInputDriver : NetworkBehaviour
         moveData = new MoveInputData
         {
             jump = _jump,
-            grounded = _characterController.isGrounded,
+            grounded = (Physics.CheckSphere(_characterController.transform.position, 0.1f, _groundMask)),
+
             moveVector = _moveInput
         };
+        OnGatherInput?.Invoke(_moveInput);
     }
     private void TimeManager_OnTick()
     {
@@ -158,19 +158,6 @@ public class PlayerInputDriver : NetworkBehaviour
 
     }
 
-    //Method for rotating player Body (which is child of gameobject with character controller) to the movement direction
-    private void Look(Vector2 moveVector)
-    {
-        Vector3 rotVector = new Vector3(moveVector.x,0,moveVector.y);
-        if (Mathf.Abs(rotVector.x) + Mathf.Abs(rotVector.z) < float.Epsilon)
-        {
-            return;
-        }
-        else
-        {
-            playerBody.rotation = Quaternion.LookRotation(rotVector, Vector3.up);
-        }
-
-    }
+    
 
 }
