@@ -30,7 +30,7 @@ public class PlayerNameTracker : NetworkBehaviour
     }
     void Awake()
     {
-        if (_instance != null && _instance != this)
+       if (_instance != null && _instance != this)
         {
             Destroy(this);
         }

@@ -84,6 +84,11 @@ public class CursorController : MonoBehaviour
                     Debug.Log(hit.collider.gameObject);
 
                  }
+                if (hit.collider.CompareTag("Player")) 
+                {
+                    OnMouseClick?.Invoke(hit.collider.gameObject);
+                    Debug.Log(hit.collider.gameObject);
+                }
              }
         }
 

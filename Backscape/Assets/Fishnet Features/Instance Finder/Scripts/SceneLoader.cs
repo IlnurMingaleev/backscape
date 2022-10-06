@@ -7,46 +7,36 @@ using UnityEngine.SceneManagement;
 using FishNet.Connection;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 
 public class SceneLoader : NetworkBehaviour
 {
+
+
     public const string SCENE_NAME_ADDITIVE = "New scene";
     public const string SCENE_NAME_MAIN = "3D scene";
+    public const string SCENE_NAME_WAREHOUSE = "Warehouse";
     public bool sceneStack = false;
-    private int stackedSceneHandle = 0;
-    Scene mainScene;
+    private NetworkObject playerNOB;
+    private Vector3 spawnPoint = new Vector3(-26,10,41);
 
+    //Scene mainScene;
+    private string[] sceneOrder = new string[] { SCENE_NAME_MAIN, SCENE_NAME_WAREHOUSE, SCENE_NAME_ADDITIVE };
+
+    private int currentScene = 0;
+
+    private NetworkObject currentNOB;
+
+    public static event Action<NetworkObject> OnSceneLoadEnd;
 
     // Subscribing for an event
     private void Start()
     {
-        InstanceFinder.SceneManager.OnLoadEnd += SceneManager_OnLoadEnd;
-        
-    }
-    
-    //Unsubscribing from an event.
-    private void OnDestroy()
-    {
-        if (InstanceFinder.SceneManager != null) 
-        {
-            InstanceFinder.SceneManager.OnLoadEnd -= SceneManager_OnLoadEnd;
-        }
+        //mainScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
     }
 
-    // Initializing stackedSceneHandle variable
-    private void SceneManager_OnLoadEnd(SceneLoadEndEventArgs obj)
-    {
-        if (!obj.QueueData.AsServer)
-            return;
-        if (!sceneStack)
-            return;
-        if (stackedSceneHandle != 0)
-            return;
 
-        if (obj.LoadedScenes.Length > 0)
-            stackedSceneHandle = obj.LoadedScenes[0].handle;
-    }
 
     //On collision with a box our new scene loads and I want the player collided with that box move to new scene.
     //While other player will remain on main scene
@@ -57,70 +47,61 @@ public class SceneLoader : NetworkBehaviour
         NetworkObject networkObject = other.GetComponent<NetworkObject>();
         if (networkObject != null) 
         {
-            LoadScene(networkObject);
-            //Debug.Log("Collision happened");
+            switch (currentScene) 
+            {
+                case 0:
+                    LoadScene(networkObject, 0);
+                    currentScene = 1;
+                    break;
+                case 1:
+                    Debug.Log("Collision is triggered");
+                    //LoadScene(networkObject, 1);
+                    //currentScene = 2;
+                    break;
+            
+            }
         }
     }
 
     //Main Logic of Loading scene
 
-    private void LoadScene(NetworkObject networkObj) 
+    private void LoadScene(NetworkObject networkObj, int index) 
     {
         if (!networkObj.Owner.IsActive)
         {
             return;
         }
 
-        SceneLookupData lookupData = new SceneLookupData(stackedSceneHandle, SCENE_NAME_ADDITIVE);
+        SceneLookupData lookupData = new SceneLookupData(sceneOrder[index + 1]);
         
         SceneLoadData sceneLoadData = new SceneLoadData(lookupData);
         sceneLoadData.Options.LocalPhysics = LocalPhysicsMode.Physics3D;
-        sceneLoadData.Options.AllowStacking = true;
+        sceneLoadData.Options.AllowStacking = false;
 
         sceneLoadData.MovedNetworkObjects = new NetworkObject[] { networkObj };
-        sceneLoadData.ReplaceScenes = ReplaceOption.OnlineOnly;
+        sceneLoadData.ReplaceScenes = ReplaceOption.None;
         InstanceFinder.SceneManager.LoadConnectionScenes(networkObj.Owner, sceneLoadData);
 
-        SceneUnloadData sceneUnloadData = new SceneUnloadData(SCENE_NAME_MAIN);
-        InstanceFinder.SceneManager.UnloadConnectionScenes(networkObj.Owner, sceneUnloadData);
+        if (index == 1) 
+        {
+            InstanceFinder.SceneManager.OnClientPresenceChangeEnd += SceneManager_OnClientPresenceChangeEnd1; ;
+            currentNOB = networkObj;
+        }
+
+        
 
 
     }
 
+    private void SceneManager_OnClientPresenceChangeEnd1(ClientPresenceChangeEventArgs obj)
+    {
+        SceneUnloadData sceneUnloadData = new SceneUnloadData(SCENE_NAME_WAREHOUSE);
+        if (currentNOB != null)
+        {
+            InstanceFinder.SceneManager.UnloadConnectionScenes(currentNOB.Owner, sceneUnloadData);
+            currentNOB.transform.position = spawnPoint;
+        }
+    }
 
 }
 
-// Commented
-
-
-
-
-
-
-
-//lookupData = new SceneLookupData(stackedSceneHandle, SCENE_NAME_ADDITIVE);
-
-
-
-
-//sceneLoadData.Options.LocalPhysics = ;
-//SceneLookupData unloadLookupData = new SceneLookupData(stackedSceneHandle, SCENE_NAME_MAIN);
-//sceneUnloadData.Options.Mode = UnloadOptions.ServerUnloadMode.UnloadUnused;
-
-
-
-
-//HashSet<NetworkConnection> networkConnectionsSet = InstanceFinder.SceneManager.SceneConnections[mainScene];
-//NetworkConnection[] networkConnections = new NetworkConnection[networkConnectionsSet.Count];
-//networkConnectionsSet.CopyTo(networkConnections);
-//InstanceFinder.SceneManager.LoadConnectionScenes(networkConnections, sceneLoadData);
-
-/*Debug.Log("Loading by handle? " + (stackedSceneHandle != 0));
-if (stackedSceneHandle != 0)
-{
-    lookupData = new SceneLookupData(stackedSceneHandle);
-}
-else 
-{
-    lookupData = new SceneLookupData(SCENE_NAME_ADDITIVE);
-}*/

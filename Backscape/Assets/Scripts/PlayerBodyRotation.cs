@@ -39,11 +39,6 @@ public class PlayerBodyRotation : NetworkBehaviour
         InstanceFinder.TimeManager.OnTick += TimeManager_OnTick;
     }
 
-    private void OnDestroy()
-    {
-        PlayerInputDriver.OnGatherInput -= PlayerInputDriver_OnGatherInput;
-        //InstanceFinder.TimeManager.OnTick -= TimeManager_OnTick;
-    }
 
     private void PlayerInputDriver_OnGatherInput(Vector2 obj)
     {
