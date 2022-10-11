@@ -10,11 +10,16 @@ public class PlayerStats : NetworkBehaviour
 {
     [SerializeField] private Transform playerName;
     [SerializeField] private Camera mainCamera;
-
+    private int currentScene = 0;
     public static event Action<string> OnPlayerNameSet;
 
     private TextMeshPro _text;
 
+    public int CurrentScene 
+    {
+        get { return currentScene; }
+        set { currentScene = value; }
+    }
     private void Awake()
     {
         _text = playerName.GetComponent<TextMeshPro>(); 

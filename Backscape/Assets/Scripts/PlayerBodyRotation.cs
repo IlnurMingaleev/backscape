@@ -10,6 +10,8 @@ public class PlayerBodyRotation : NetworkBehaviour
 
 
     private Vector2 inputVector;
+    [SerializeField] private LayerMask cubeLayerMask;
+    private float raycastDistance = 2.0f;
 
     #region Types
     public struct MoveInputData 
@@ -116,4 +118,5 @@ public class PlayerBodyRotation : NetworkBehaviour
         }
 
     }
+
 }
