@@ -15,7 +15,7 @@ using System.Collections.Generic;
 using System;
 
 
-public class SceneChanger : NetworkBehaviour
+public class SceneChanger : MonoBehaviour
 {
 
 
@@ -129,6 +129,7 @@ public class SceneChanger : NetworkBehaviour
             return;
         }
 
+        currentNOB = networkObj;
         SceneLookupData lookupData = new SceneLookupData( sceneOrder[index + 1]);
 
         SceneLoadData sceneLoadData = new SceneLoadData(lookupData);
@@ -140,9 +141,10 @@ public class SceneChanger : NetworkBehaviour
         InstanceFinder.SceneManager.LoadConnectionScenes(networkObj.Owner, sceneLoadData);
 
         if (index == 1)
-        {
+        { 
+            
             InstanceFinder.SceneManager.OnClientPresenceChangeEnd += SceneManager_OnClientPresenceChangeEnd1; ;
-            currentNOB = networkObj;
+            
         }
 
 
@@ -154,10 +156,11 @@ public class SceneChanger : NetworkBehaviour
     {
 
         SceneUnloadData sceneUnloadData = new SceneUnloadData(SCENE_NAME_WAREHOUSE);
+        sceneUnloadData.Options.Mode = UnloadOptions.ServerUnloadMode.UnloadUnused;
         if (currentNOB != null)
         {
             InstanceFinder.SceneManager.UnloadConnectionScenes(currentNOB.Owner, sceneUnloadData);
-            currentNOB.transform.position = spawnPoint;
+            //currentNOB.transform.position = spawnPoint;
         }
     }
 
