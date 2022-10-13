@@ -36,10 +36,6 @@ public class SceneChanger : MonoBehaviour
 
     public static event Action<NetworkObject> OnSceneLoadEnd;
 
-    //private float raycastDistance = 2.0f;
-    //[SerializeField] private LayerMask cubeLayerMask;
-    //private bool xKeyPressed = false;
-
 
 
 
@@ -67,59 +63,8 @@ public class SceneChanger : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        //InstanceFinder.SceneManager.OnLoadEnd += SceneManager_OnLoadEnd; ;
-        //InstanceFinder.TimeManager.OnTick += TimeManager_OnTick;
-    }
 
-    /*private void SceneManager_OnLoadEnd(SceneLoadEndEventArgs obj)
-    {
-        if (!obj.QueueData.AsServer)
-        {
-            return;
-        }
-        if (sceneStack)
-        {
-            return;
-        }
-
-        if (stackedSceneHandle != 0)
-        {
-            return;
-        }
-        if (obj.LoadedScenes.Length > 0)
-        {
-            stackedSceneHandle = obj.LoadedScenes[0].handle;
-        }
-    }
-*/
-
-   /* private void TimeManager_OnTick()
-    {
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            xKeyPressed = true;
-
-        }
-        if (xKeyPressed)
-        {
-            PerformRaycast();
-            xKeyPressed = false;
-        }
-
-
-
-
-    }*/
-
-/*    private void OnDestroy()
-    {
-        if (InstanceFinder.SceneManager != null)
-        {
-            InstanceFinder.SceneManager.OnLoadEnd -= SceneManager_OnLoadEnd;
-        }
-    }*/
+    
     //Main Logic of Loading scene
     
     private void LoadScene(NetworkObject networkObj, int index)
@@ -160,26 +105,7 @@ public class SceneChanger : MonoBehaviour
         if (currentNOB != null)
         {
             InstanceFinder.SceneManager.UnloadConnectionScenes(currentNOB.Owner, sceneUnloadData);
-            //currentNOB.transform.position = spawnPoint;
         }
     }
-
-    /*private void PerformRaycast()
-    {
-
-        RaycastHit hit;
-        Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, raycastDistance, cubeLayerMask);
-        if (hit.collider != null)
-        {
-            //Debug.Log("raycast performed");
-            ChooseScene();
-        }
-
-
-        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.red);
-
-
-
-    }*/
 }
 
