@@ -23,4 +23,10 @@ public class SingletonColors : MonoBehaviour
             Instance = this;
         }
     }
+
+    public static Color GetRandomColor() 
+    {
+        int randomIndex = Random.Range(0, 3);
+        return Instance.colors[randomIndex];
+    }
 }

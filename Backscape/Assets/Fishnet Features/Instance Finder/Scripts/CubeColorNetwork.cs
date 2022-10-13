@@ -8,36 +8,21 @@ using FishNet.Observing;
 
 public class CubeColorNetwork : NetworkBehaviour
 {
-    private Color endColor = Color.cyan;
+    private Color endColor;
     private NetworkObject networkObject;
-    
-    public override void OnStartClient()
-    {
-        base.OnStartClient();
-        networkObject = GetComponent<NetworkObject>();
-        networkObject.GiveOwnership(base.Owner);
-        if(base.IsOwner)
-        {
-
-
-        }
-        else
-        {
-            GetComponent<CubeColorNetwork>().enabled = false;
-        }
-    }
 
     // Update is called once per frame
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.X))
         {
+            endColor = SingletonColors.GetRandomColor();
             ChangeColorServer(gameObject,endColor);
 
         }
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     public void ChangeColorServer(GameObject gameObj, Color color)
     {
         ChangeColor(gameObj, color);

@@ -737,6 +737,7 @@ GameObject:
   - component: {fileID: 634088054}
   - component: {fileID: 634088053}
   - component: {fileID: 634088058}
+  - component: {fileID: 634088059}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: Untagged
@@ -804,7 +805,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2c95dfde7d73b54dbbdc23155d35d36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _refreshDefaultPrefabs: 0
+  _refreshDefaultPrefabs: 1
   _runInBackground: 1
   _dontDestroyOnLoad: 1
   _persistence: 0
@@ -843,6 +844,21 @@ MonoBehaviour:
   _timingInterval: 2
   _physicsMode: 1
   _maximumBufferedInputs: 15
+--- !u!114 &634088059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 634088052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d331f979d46e8e4a9fc90070c596d44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _updateHostVisibility: 1
+  _defaultConditions:
+  - {fileID: 11400000, guid: 1d7ca71e8b10027458fdb0917d3c881d, type: 2}
 --- !u!1001 &675862583
 PrefabInstance:
   m_ObjectHideFlags: 0
