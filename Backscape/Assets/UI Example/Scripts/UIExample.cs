@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEditor;
 using UnityEditor.UIElements;
+using System;
 
 public class UIExample: EditorWindow
 {
@@ -11,6 +12,7 @@ public class UIExample: EditorWindow
     private VisualTreeAsset videoPage;
     private VisualTreeAsset listPage;
     private StyleSheet mutualStyle;
+    private Action<Button> OnItemClicked;
 
     private Dictionary<string, Button> uiButtons;
 
@@ -26,6 +28,10 @@ public class UIExample: EditorWindow
         uiExample.titleContent = new GUIContent("UIExample");
 
         
+
+    }
+    private void OnDestroy()
+    {
 
     }
 
@@ -46,7 +52,9 @@ public class UIExample: EditorWindow
 
 
         rootVisualElement.Add(tutorialPage.Instantiate());
-        uiButtons.Add("item", rootVisualElement.Q<Button>("item"));
+        OnItemClicked = AddListenerToItemBtn;
+        rootVisualElement.Query<Button>("item").ForEach( OnItemClicked );
+        //uiButtons.Add("item", rootVisualElement.Q<Button>("item"));
 
 
         /*videoPage = new VisualElement();
@@ -63,18 +71,22 @@ public class UIExample: EditorWindow
         tutorialPage.styleSheets.Add(mutualStyle);
         videoPage.styleSheets.Add(mutualStyle);
         listPage.styleSheets.Add(mutualStyle);*/
-        Button button = uiButtons["item"];
-        if (button != null)
+        //Button button = uiButtons["item"];
+        /*if (button != null)
         {
             button.clickable.clicked += ItemClicked;
         }
         else 
         {
             Debug.Log("Button is null");
-        }
+        }*/
         
         //["menu_btn_back"].RegisterCallback<MouseDownEvent>(BackButtonClicked);
 
+    }
+    private void AddListenerToItemBtn(Button button) 
+    {
+        button.clickable.clicked += ItemClicked;
     }
 
     private void ClearRootVisualElement() 
