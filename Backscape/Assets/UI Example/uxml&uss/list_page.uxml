@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Example/uxml&amp;uss/style.uss?fileID=7433441132597879392&amp;guid=7ddde310778bfbc439a83b8d2b2b2a80&amp;type=3#style" />
     <ui:GroupBox name="container" class="container" style="width: 100%; flex-grow: 0; align-items: stretch; margin-left: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;">
-        <ui:VisualElement name="navigation_panel" class="theme navigation" style="height: 50px; min-height: auto; max-height: none; min-width: auto; max-width: none; width: 100%; flex-grow: 0; position: relative; top: auto; left: auto; flex-shrink: 1;">
+        <ui:VisualElement name="navigation_panel" class="theme navigation" style="height: 50px; min-height: auto; max-height: none; min-width: auto; max-width: none; width: 100%; flex-grow: 0; position: absolute; top: auto; left: auto; flex-shrink: 1;">
             <ui:VisualElement name="control_panel" class="control_panel" style="width: 70%; height: 100%; flex-direction: row; flex-grow: 8;">
                 <ui:Button tabindex="-1" display-tooltip-when-elided="true" name="back_btn" class="back_btn" />
                 <ui:Label tabindex="-1" text="Video" display-tooltip-when-elided="true" name="page_name" class="page_name" style="-unity-text-align: middle-left;" />
@@ -10,132 +10,116 @@
                 <ui:Button tabindex="-1" display-tooltip-when-elided="true" name="search_btn" class="search_btn" style="border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; border-top-left-radius: 0; border-bottom-left-radius: 0; border-top-right-radius: 0; border-bottom-right-radius: 0; background-image: url(&apos;project://database/Assets/UI%20Example/img/search_btn.png?fileID=2800000&amp;guid=17c3d3493f1f61b4fb092d79bf4ad0c6&amp;type=3#search_btn&apos;);" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:ScrollView scroll-deceleration-rate="0,135" elasticity="150" name="scroll_view" mode="Vertical" usage-hints="MaskContainer" focusable="true" touch-scroll-type="Unrestricted" nested-interaction-kind="ForwardScrolling" vertical-page-size="-1" horizontal-scroller-visibility="Hidden" vertical-scroller-visibility="Hidden" horizontal-page-size="-1" style="flex-direction: row; flex-wrap: wrap; justify-content: space-between; flex-grow: initial; align-items: stretch; width: 100%; top: auto; overflow: visible; visibility: visible; flex-shrink: initial; opacity: 0.78; height: 613px; background-color: rgb(211, 211, 211);">
-            <ui:Button tabindex="-1" display-tooltip-when-elided="true" name="list_item" class="list_item" style="padding-top: 0; padding-bottom: 5px; padding-left: 5px; padding-right: 5px;">
-                <ui:VisualElement name="list_img" class="list_img" />
-                <ui:VisualElement name="list_item_content" class="list_item_content">
-                    <ui:Label tabindex="-1" text="Lorem ipsum dolor sit amet" display-tooltip-when-elided="true" name="list_item_name" class="list_item_name" />
-                </ui:VisualElement>
-                <ui:VisualElement name="list_item_toggle_container" class="list_item_toggle_container">
-                    <ui:Toggle name="list_item_toggle" class="list_item_toggle" />
-                </ui:VisualElement>
+        <ui:ScrollView scroll-deceleration-rate="0,135" elasticity="0,1" name="scrollview" style="padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px; top: 50px;">
+            <ui:Button tabindex="-1" display-tooltip-when-elided="true" name="list_item" class="list_item" style="padding-top: 0; padding-bottom: 0; padding-left: 0; padding-right: 0; flex-shrink: 1; flex-grow: 0; width: 100%; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;">
+                <ui:VisualElement name="list_img" class="list_img" style="flex-grow: 0; flex-direction: row;" />
+                <ui:Label tabindex="-1" text="Lorem ipsum dolor sit amet" display-tooltip-when-elided="true" name="list_item_name" class="list_item_name" />
+                <ui:Toggle name="list_item_toggle" class="list_item_toggle" style="right: auto; position: relative; top: auto;" />
             </ui:Button>
-            <ui:Button tabindex="-1" display-tooltip-when-elided="true" name="list_item" class="list_item" style="padding-top: 0; padding-bottom: 5px; padding-left: 5px; padding-right: 5px;">
-                <ui:VisualElement name="list_img" class="list_img" />
-                <ui:VisualElement name="list_item_content" class="list_item_content">
-                    <ui:Label tabindex="-1" text="Lorem ipsum dolor sit amet" display-tooltip-when-elided="true" name="list_item_name" class="list_item_name" />
-                </ui:VisualElement>
-                <ui:VisualElement name="list_item_toggle_container" class="list_item_toggle_container">
-                    <ui:Toggle name="list_item_toggle" class="list_item_toggle" />
-                </ui:VisualElement>
+            <ui:Button tabindex="-1" display-tooltip-when-elided="true" name="list_item" class="list_item" style="padding-top: 0; padding-bottom: 0; padding-left: 0; padding-right: 0; flex-shrink: 1; flex-grow: 0; width: 100%; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;">
+                <ui:VisualElement name="list_img" class="list_img" style="flex-grow: 0; flex-direction: row;" />
+                <ui:Label tabindex="-1" text="Lorem ipsum dolor sit amet" display-tooltip-when-elided="true" name="list_item_name" class="list_item_name" />
+                <ui:Toggle name="list_item_toggle" class="list_item_toggle" style="right: auto; position: relative; top: auto;" />
             </ui:Button>
-            <ui:Button tabindex="-1" display-tooltip-when-elided="true" name="list_item" class="list_item" style="padding-top: 0; padding-bottom: 5px; padding-left: 5px; padding-right: 5px;">
-                <ui:VisualElement name="list_img" class="list_img" />
-                <ui:VisualElement name="list_item_content" class="list_item_content">
-                    <ui:Label tabindex="-1" text="Lorem ipsum dolor sit amet" display-tooltip-when-elided="true" name="list_item_name" class="list_item_name" />
-                </ui:VisualElement>
-                <ui:VisualElement name="list_item_toggle_container" class="list_item_toggle_container">
-                    <ui:Toggle name="list_item_toggle" class="list_item_toggle" />
-                </ui:VisualElement>
+            <ui:Button tabindex="-1" display-tooltip-when-elided="true" name="list_item" class="list_item" style="padding-top: 0; padding-bottom: 0; padding-left: 0; padding-right: 0; flex-shrink: 1; flex-grow: 0; width: 100%; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;">
+                <ui:VisualElement name="list_img" class="list_img" style="flex-grow: 0; flex-direction: row;" />
+                <ui:Label tabindex="-1" text="Lorem ipsum dolor sit amet" display-tooltip-when-elided="true" name="list_item_name" class="list_item_name" />
+                <ui:Toggle name="list_item_toggle" class="list_item_toggle" style="right: auto; position: relative; top: auto;" />
             </ui:Button>
-            <ui:Button tabindex="-1" display-tooltip-when-elided="true" name="list_item" class="list_item" style="padding-top: 0; padding-bottom: 5px; padding-left: 5px; padding-right: 5px;">
-                <ui:VisualElement name="list_img" class="list_img" />
-                <ui:VisualElement name="list_item_content" class="list_item_content">
-                    <ui:Label tabindex="-1" text="Lorem ipsum dolor sit amet" display-tooltip-when-elided="true" name="list_item_name" class="list_item_name" />
-                </ui:VisualElement>
-                <ui:VisualElement name="list_item_toggle_container" class="list_item_toggle_container">
-                    <ui:Toggle name="list_item_toggle" class="list_item_toggle" />
-                </ui:VisualElement>
+            <ui:Button tabindex="-1" display-tooltip-when-elided="true" name="list_item" class="list_item" style="padding-top: 0; padding-bottom: 0; padding-left: 0; padding-right: 0; flex-shrink: 1; flex-grow: 0; width: 100%; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;">
+                <ui:VisualElement name="list_img" class="list_img" style="flex-grow: 0; flex-direction: row;" />
+                <ui:Label tabindex="-1" text="Lorem ipsum dolor sit amet" display-tooltip-when-elided="true" name="list_item_name" class="list_item_name" />
+                <ui:Toggle name="list_item_toggle" class="list_item_toggle" style="right: auto; position: relative; top: auto;" />
             </ui:Button>
-            <ui:Button tabindex="-1" display-tooltip-when-elided="true" name="list_item" class="list_item" style="padding-top: 0; padding-bottom: 5px; padding-left: 5px; padding-right: 5px;">
-                <ui:VisualElement name="list_img" class="list_img" />
-                <ui:VisualElement name="list_item_content" class="list_item_content">
-                    <ui:Label tabindex="-1" text="Lorem ipsum dolor sit amet" display-tooltip-when-elided="true" name="list_item_name" class="list_item_name" />
-                </ui:VisualElement>
-                <ui:VisualElement name="list_item_toggle_container" class="list_item_toggle_container">
-                    <ui:Toggle name="list_item_toggle" class="list_item_toggle" />
-                </ui:VisualElement>
+            <ui:Button tabindex="-1" display-tooltip-when-elided="true" name="list_item" class="list_item" style="padding-top: 0; padding-bottom: 0; padding-left: 0; padding-right: 0; flex-shrink: 1; flex-grow: 0; width: 100%; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;">
+                <ui:VisualElement name="list_img" class="list_img" style="flex-grow: 0; flex-direction: row;" />
+                <ui:Label tabindex="-1" text="Lorem ipsum dolor sit amet" display-tooltip-when-elided="true" name="list_item_name" class="list_item_name" />
+                <ui:Toggle name="list_item_toggle" class="list_item_toggle" style="right: auto; position: relative; top: auto;" />
             </ui:Button>
-            <ui:Button tabindex="-1" display-tooltip-when-elided="true" name="list_item" class="list_item" style="padding-top: 0; padding-bottom: 5px; padding-left: 5px; padding-right: 5px;">
-                <ui:VisualElement name="list_img" class="list_img" />
-                <ui:VisualElement name="list_item_content" class="list_item_content">
-                    <ui:Label tabindex="-1" text="Lorem ipsum dolor sit amet" display-tooltip-when-elided="true" name="list_item_name" class="list_item_name" />
-                </ui:VisualElement>
-                <ui:VisualElement name="list_item_toggle_container" class="list_item_toggle_container">
-                    <ui:Toggle name="list_item_toggle" class="list_item_toggle" />
-                </ui:VisualElement>
+            <ui:Button tabindex="-1" display-tooltip-when-elided="true" name="list_item" class="list_item" style="padding-top: 0; padding-bottom: 0; padding-left: 0; padding-right: 0; flex-shrink: 1; flex-grow: 0; width: 100%; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;">
+                <ui:VisualElement name="list_img" class="list_img" style="flex-grow: 0; flex-direction: row;" />
+                <ui:Label tabindex="-1" text="Lorem ipsum dolor sit amet" display-tooltip-when-elided="true" name="list_item_name" class="list_item_name" />
+                <ui:Toggle name="list_item_toggle" class="list_item_toggle" style="right: auto; position: relative; top: auto;" />
             </ui:Button>
-            <ui:Button tabindex="-1" display-tooltip-when-elided="true" name="list_item" class="list_item" style="padding-top: 0; padding-bottom: 5px; padding-left: 5px; padding-right: 5px;">
-                <ui:VisualElement name="list_img" class="list_img" />
-                <ui:VisualElement name="list_item_content" class="list_item_content">
-                    <ui:Label tabindex="-1" text="Lorem ipsum dolor sit amet" display-tooltip-when-elided="true" name="list_item_name" class="list_item_name" />
-                </ui:VisualElement>
-                <ui:VisualElement name="list_item_toggle_container" class="list_item_toggle_container">
-                    <ui:Toggle name="list_item_toggle" class="list_item_toggle" />
-                </ui:VisualElement>
+            <ui:Button tabindex="-1" display-tooltip-when-elided="true" name="list_item" class="list_item" style="padding-top: 0; padding-bottom: 0; padding-left: 0; padding-right: 0; flex-shrink: 1; flex-grow: 0; width: 100%; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;">
+                <ui:VisualElement name="list_img" class="list_img" style="flex-grow: 0; flex-direction: row;" />
+                <ui:Label tabindex="-1" text="Lorem ipsum dolor sit amet" display-tooltip-when-elided="true" name="list_item_name" class="list_item_name" />
+                <ui:Toggle name="list_item_toggle" class="list_item_toggle" style="right: auto; position: relative; top: auto;" />
             </ui:Button>
-            <ui:Button tabindex="-1" display-tooltip-when-elided="true" name="list_item" class="list_item" style="padding-top: 0; padding-bottom: 5px; padding-left: 5px; padding-right: 5px;">
-                <ui:VisualElement name="list_img" class="list_img" />
-                <ui:VisualElement name="list_item_content" class="list_item_content">
-                    <ui:Label tabindex="-1" text="Lorem ipsum dolor sit amet" display-tooltip-when-elided="true" name="list_item_name" class="list_item_name" />
-                </ui:VisualElement>
-                <ui:VisualElement name="list_item_toggle_container" class="list_item_toggle_container">
-                    <ui:Toggle name="list_item_toggle" class="list_item_toggle" />
-                </ui:VisualElement>
+            <ui:Button tabindex="-1" display-tooltip-when-elided="true" name="list_item" class="list_item" style="padding-top: 0; padding-bottom: 0; padding-left: 0; padding-right: 0; flex-shrink: 1; flex-grow: 0; width: 100%; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;">
+                <ui:VisualElement name="list_img" class="list_img" style="flex-grow: 0; flex-direction: row;" />
+                <ui:Label tabindex="-1" text="Lorem ipsum dolor sit amet" display-tooltip-when-elided="true" name="list_item_name" class="list_item_name" />
+                <ui:Toggle name="list_item_toggle" class="list_item_toggle" style="right: auto; position: relative; top: auto;" />
             </ui:Button>
-            <ui:Button tabindex="-1" display-tooltip-when-elided="true" name="list_item" class="list_item" style="padding-top: 0; padding-bottom: 5px; padding-left: 5px; padding-right: 5px;">
-                <ui:VisualElement name="list_img" class="list_img" />
-                <ui:VisualElement name="list_item_content" class="list_item_content">
-                    <ui:Label tabindex="-1" text="Lorem ipsum dolor sit amet" display-tooltip-when-elided="true" name="list_item_name" class="list_item_name" />
-                </ui:VisualElement>
-                <ui:VisualElement name="list_item_toggle_container" class="list_item_toggle_container">
-                    <ui:Toggle name="list_item_toggle" class="list_item_toggle" />
-                </ui:VisualElement>
+            <ui:Button tabindex="-1" display-tooltip-when-elided="true" name="list_item" class="list_item" style="padding-top: 0; padding-bottom: 0; padding-left: 0; padding-right: 0; flex-shrink: 1; flex-grow: 0; width: 100%; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;">
+                <ui:VisualElement name="list_img" class="list_img" style="flex-grow: 0; flex-direction: row;" />
+                <ui:Label tabindex="-1" text="Lorem ipsum dolor sit amet" display-tooltip-when-elided="true" name="list_item_name" class="list_item_name" />
+                <ui:Toggle name="list_item_toggle" class="list_item_toggle" style="right: auto; position: relative; top: auto;" />
             </ui:Button>
-            <ui:Button tabindex="-1" display-tooltip-when-elided="true" name="list_item" class="list_item" style="padding-top: 0; padding-bottom: 5px; padding-left: 5px; padding-right: 5px;">
-                <ui:VisualElement name="list_img" class="list_img" />
-                <ui:VisualElement name="list_item_content" class="list_item_content">
-                    <ui:Label tabindex="-1" text="Lorem ipsum dolor sit amet" display-tooltip-when-elided="true" name="list_item_name" class="list_item_name" />
-                </ui:VisualElement>
-                <ui:VisualElement name="list_item_toggle_container" class="list_item_toggle_container">
-                    <ui:Toggle name="list_item_toggle" class="list_item_toggle" />
-                </ui:VisualElement>
+            <ui:Button tabindex="-1" display-tooltip-when-elided="true" name="list_item" class="list_item" style="padding-top: 0; padding-bottom: 0; padding-left: 0; padding-right: 0; flex-shrink: 1; flex-grow: 0; width: 100%; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;">
+                <ui:VisualElement name="list_img" class="list_img" style="flex-grow: 0; flex-direction: row;" />
+                <ui:Label tabindex="-1" text="Lorem ipsum dolor sit amet" display-tooltip-when-elided="true" name="list_item_name" class="list_item_name" />
+                <ui:Toggle name="list_item_toggle" class="list_item_toggle" style="right: auto; position: relative; top: auto;" />
             </ui:Button>
-            <ui:Button tabindex="-1" display-tooltip-when-elided="true" name="list_item" class="list_item" style="padding-top: 0; padding-bottom: 5px; padding-left: 5px; padding-right: 5px;">
-                <ui:VisualElement name="list_img" class="list_img" />
-                <ui:VisualElement name="list_item_content" class="list_item_content">
-                    <ui:Label tabindex="-1" text="Lorem ipsum dolor sit amet" display-tooltip-when-elided="true" name="list_item_name" class="list_item_name" />
-                </ui:VisualElement>
-                <ui:VisualElement name="list_item_toggle_container" class="list_item_toggle_container">
-                    <ui:Toggle name="list_item_toggle" class="list_item_toggle" />
-                </ui:VisualElement>
+            <ui:Button tabindex="-1" display-tooltip-when-elided="true" name="list_item" class="list_item" style="padding-top: 0; padding-bottom: 0; padding-left: 0; padding-right: 0; flex-shrink: 1; flex-grow: 0; width: 100%; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;">
+                <ui:VisualElement name="list_img" class="list_img" style="flex-grow: 0; flex-direction: row;" />
+                <ui:Label tabindex="-1" text="Lorem ipsum dolor sit amet" display-tooltip-when-elided="true" name="list_item_name" class="list_item_name" />
+                <ui:Toggle name="list_item_toggle" class="list_item_toggle" style="right: auto; position: relative; top: auto;" />
             </ui:Button>
-            <ui:Button tabindex="-1" display-tooltip-when-elided="true" name="list_item" class="list_item" style="padding-top: 0; padding-bottom: 5px; padding-left: 5px; padding-right: 5px;">
-                <ui:VisualElement name="list_img" class="list_img" />
-                <ui:VisualElement name="list_item_content" class="list_item_content">
-                    <ui:Label tabindex="-1" text="Lorem ipsum dolor sit amet" display-tooltip-when-elided="true" name="list_item_name" class="list_item_name" />
-                </ui:VisualElement>
-                <ui:VisualElement name="list_item_toggle_container" class="list_item_toggle_container">
-                    <ui:Toggle name="list_item_toggle" class="list_item_toggle" />
-                </ui:VisualElement>
+            <ui:Button tabindex="-1" display-tooltip-when-elided="true" name="list_item" class="list_item" style="padding-top: 0; padding-bottom: 0; padding-left: 0; padding-right: 0; flex-shrink: 1; flex-grow: 0; width: 100%; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;">
+                <ui:VisualElement name="list_img" class="list_img" style="flex-grow: 0; flex-direction: row;" />
+                <ui:Label tabindex="-1" text="Lorem ipsum dolor sit amet" display-tooltip-when-elided="true" name="list_item_name" class="list_item_name" />
+                <ui:Toggle name="list_item_toggle" class="list_item_toggle" style="right: auto; position: relative; top: auto;" />
             </ui:Button>
-            <ui:Button tabindex="-1" display-tooltip-when-elided="true" name="list_item" class="list_item" style="padding-top: 0; padding-bottom: 5px; padding-left: 5px; padding-right: 5px;">
-                <ui:VisualElement name="list_img" class="list_img" />
-                <ui:VisualElement name="list_item_content" class="list_item_content">
-                    <ui:Label tabindex="-1" text="Lorem ipsum dolor sit amet" display-tooltip-when-elided="true" name="list_item_name" class="list_item_name" />
-                </ui:VisualElement>
-                <ui:VisualElement name="list_item_toggle_container" class="list_item_toggle_container">
-                    <ui:Toggle name="list_item_toggle" class="list_item_toggle" />
-                </ui:VisualElement>
+            <ui:Button tabindex="-1" display-tooltip-when-elided="true" name="list_item" class="list_item" style="padding-top: 0; padding-bottom: 0; padding-left: 0; padding-right: 0; flex-shrink: 1; flex-grow: 0; width: 100%; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;">
+                <ui:VisualElement name="list_img" class="list_img" style="flex-grow: 0; flex-direction: row;" />
+                <ui:Label tabindex="-1" text="Lorem ipsum dolor sit amet" display-tooltip-when-elided="true" name="list_item_name" class="list_item_name" />
+                <ui:Toggle name="list_item_toggle" class="list_item_toggle" style="right: auto; position: relative; top: auto;" />
             </ui:Button>
-            <ui:Button tabindex="-1" display-tooltip-when-elided="true" name="list_item" class="list_item" style="padding-top: 0; padding-bottom: 5px; padding-left: 5px; padding-right: 5px;">
-                <ui:VisualElement name="list_img" class="list_img" />
-                <ui:VisualElement name="list_item_content" class="list_item_content">
-                    <ui:Label tabindex="-1" text="Lorem ipsum dolor sit amet" display-tooltip-when-elided="true" name="list_item_name" class="list_item_name" />
-                </ui:VisualElement>
-                <ui:VisualElement name="list_item_toggle_container" class="list_item_toggle_container">
-                    <ui:Toggle name="list_item_toggle" class="list_item_toggle" />
-                </ui:VisualElement>
+            <ui:Button tabindex="-1" display-tooltip-when-elided="true" name="list_item" class="list_item" style="padding-top: 0; padding-bottom: 0; padding-left: 0; padding-right: 0; flex-shrink: 1; flex-grow: 0; width: 100%; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;">
+                <ui:VisualElement name="list_img" class="list_img" style="flex-grow: 0; flex-direction: row;" />
+                <ui:Label tabindex="-1" text="Lorem ipsum dolor sit amet" display-tooltip-when-elided="true" name="list_item_name" class="list_item_name" />
+                <ui:Toggle name="list_item_toggle" class="list_item_toggle" style="right: auto; position: relative; top: auto;" />
+            </ui:Button>
+            <ui:Button tabindex="-1" display-tooltip-when-elided="true" name="list_item" class="list_item" style="padding-top: 0; padding-bottom: 0; padding-left: 0; padding-right: 0; flex-shrink: 1; flex-grow: 0; width: 100%; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;">
+                <ui:VisualElement name="list_img" class="list_img" style="flex-grow: 0; flex-direction: row;" />
+                <ui:Label tabindex="-1" text="Lorem ipsum dolor sit amet" display-tooltip-when-elided="true" name="list_item_name" class="list_item_name" />
+                <ui:Toggle name="list_item_toggle" class="list_item_toggle" style="right: auto; position: relative; top: auto;" />
+            </ui:Button>
+            <ui:Button tabindex="-1" display-tooltip-when-elided="true" name="list_item" class="list_item" style="padding-top: 0; padding-bottom: 0; padding-left: 0; padding-right: 0; flex-shrink: 1; flex-grow: 0; width: 100%; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;">
+                <ui:VisualElement name="list_img" class="list_img" style="flex-grow: 0; flex-direction: row;" />
+                <ui:Label tabindex="-1" text="Lorem ipsum dolor sit amet" display-tooltip-when-elided="true" name="list_item_name" class="list_item_name" />
+                <ui:Toggle name="list_item_toggle" class="list_item_toggle" style="right: auto; position: relative; top: auto;" />
+            </ui:Button>
+            <ui:Button tabindex="-1" display-tooltip-when-elided="true" name="list_item" class="list_item" style="padding-top: 0; padding-bottom: 0; padding-left: 0; padding-right: 0; flex-shrink: 1; flex-grow: 0; width: 100%; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;">
+                <ui:VisualElement name="list_img" class="list_img" style="flex-grow: 0; flex-direction: row;" />
+                <ui:Label tabindex="-1" text="Lorem ipsum dolor sit amet" display-tooltip-when-elided="true" name="list_item_name" class="list_item_name" />
+                <ui:Toggle name="list_item_toggle" class="list_item_toggle" style="right: auto; position: relative; top: auto;" />
+            </ui:Button>
+            <ui:Button tabindex="-1" display-tooltip-when-elided="true" name="list_item" class="list_item" style="padding-top: 0; padding-bottom: 0; padding-left: 0; padding-right: 0; flex-shrink: 1; flex-grow: 0; width: 100%; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;">
+                <ui:VisualElement name="list_img" class="list_img" style="flex-grow: 0; flex-direction: row;" />
+                <ui:Label tabindex="-1" text="Lorem ipsum dolor sit amet" display-tooltip-when-elided="true" name="list_item_name" class="list_item_name" />
+                <ui:Toggle name="list_item_toggle" class="list_item_toggle" style="right: auto; position: relative; top: auto;" />
+            </ui:Button>
+            <ui:Button tabindex="-1" display-tooltip-when-elided="true" name="list_item" class="list_item" style="padding-top: 0; padding-bottom: 0; padding-left: 0; padding-right: 0; flex-shrink: 1; flex-grow: 0; width: 100%; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;">
+                <ui:VisualElement name="list_img" class="list_img" style="flex-grow: 0; flex-direction: row;" />
+                <ui:Label tabindex="-1" text="Lorem ipsum dolor sit amet" display-tooltip-when-elided="true" name="list_item_name" class="list_item_name" />
+                <ui:Toggle name="list_item_toggle" class="list_item_toggle" style="right: auto; position: relative; top: auto;" />
+            </ui:Button>
+            <ui:Button tabindex="-1" display-tooltip-when-elided="true" name="list_item" class="list_item" style="padding-top: 0; padding-bottom: 0; padding-left: 0; padding-right: 0; flex-shrink: 1; flex-grow: 0; width: 100%; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;">
+                <ui:VisualElement name="list_img" class="list_img" style="flex-grow: 0; flex-direction: row;" />
+                <ui:Label tabindex="-1" text="Lorem ipsum dolor sit amet" display-tooltip-when-elided="true" name="list_item_name" class="list_item_name" />
+                <ui:Toggle name="list_item_toggle" class="list_item_toggle" style="right: auto; position: relative; top: auto;" />
+            </ui:Button>
+            <ui:Button tabindex="-1" display-tooltip-when-elided="true" name="list_item" class="list_item" style="padding-top: 0; padding-bottom: 0; padding-left: 0; padding-right: 0; flex-shrink: 1; flex-grow: 0; width: 100%; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;">
+                <ui:VisualElement name="list_img" class="list_img" style="flex-grow: 0; flex-direction: row;" />
+                <ui:Label tabindex="-1" text="Lorem ipsum dolor sit amet" display-tooltip-when-elided="true" name="list_item_name" class="list_item_name" />
+                <ui:Toggle name="list_item_toggle" class="list_item_toggle" style="right: auto; position: relative; top: auto;" />
+            </ui:Button>
+            <ui:Button tabindex="-1" display-tooltip-when-elided="true" name="list_item" class="list_item" style="padding-top: 0; padding-bottom: 0; padding-left: 0; padding-right: 0; flex-shrink: 1; flex-grow: 0; width: 100%; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;">
+                <ui:VisualElement name="list_img" class="list_img" style="flex-grow: 0; flex-direction: row;" />
+                <ui:Label tabindex="-1" text="Lorem ipsum dolor sit amet" display-tooltip-when-elided="true" name="list_item_name" class="list_item_name" />
+                <ui:Toggle name="list_item_toggle" class="list_item_toggle" style="right: auto; position: relative; top: auto;" />
             </ui:Button>
         </ui:ScrollView>
         <ui:GroupBox name="menu" class="menu theme" style="position: absolute; width: 100%; top: auto; bottom: 3px; flex-grow: 1; display: flex; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; left: -1px; flex-direction: row; justify-content: space-around;">
