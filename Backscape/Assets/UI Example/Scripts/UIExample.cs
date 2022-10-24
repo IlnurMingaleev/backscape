@@ -5,9 +5,14 @@ using UnityEngine.UIElements;
 using UnityEditor;
 using UnityEditor.UIElements;
 using System;
+using UnityEngine.Events;
+using Unity.EditorCoroutines.Editor;
 
-public class UIExample: EditorWindow
+[System.Serializable]
+[ExecuteInEditMode]
+public class UIExample : EditorWindow
 {
+    #region Class data
     private VisualTreeAsset tutorialPage;
     private VisualTreeAsset videoPage;
     private VisualTreeAsset listPage;
@@ -18,22 +23,43 @@ public class UIExample: EditorWindow
 
     private string currentPage;
 
-    private string[] pageNames = new string[] { "tutorialPage", "listPage", "videoPage" };
+    private float transitionDuration = 1;
+
+    private EasingMode easing = EasingMode.EaseInOut;
+
+    private StyleList<EasingFunction> easingValues;
+
+    private List<TimeValue> durationValues;
+
+
+    private ScrollView scrollView;
+
+    private string animatedClass = "scrollview";
+
+    private string marginClass = "margin_left_scrollview";
+
+    #endregion
+
+    #region Initialize GUI
 
     [MenuItem("UI/UIExample")]
-
-    public static void ShowWindow() 
+    public static void ShowWindow()
     {
         UIExample uiExample = GetWindow<UIExample>();
         uiExample.titleContent = new GUIContent("UIExample");
     }
 
-    
+    /// <summary>
+    /// Initialize GUI
+    /// </summary>
     public void CreateGUI()
     {
         //Initialize UI buttons dictionary
         uiButtons = new Dictionary<string, Button>();
 
+        // Initialising values for transition
+        durationValues = new List<TimeValue>() { new TimeValue(transitionDuration, TimeUnit.Second) };
+        easingValues = new StyleList<EasingFunction>(new List<EasingFunction> { new EasingFunction(easing) });
 
 
         // Load UXML files to UnityEditor window. One as default. Other for next button onklick events.
@@ -46,8 +72,34 @@ public class UIExample: EditorWindow
         //Load first page of UI
         LoadTutorialPage();
 
+
+    }
+
+    #endregion
+
+    #region Courotine IEnumerator
+    /// <summary>
+    /// IEnumerator for performing transitions
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator PerformTransition()
+    {
+        scrollView = rootVisualElement.Q<ScrollView>("scrollview");
+        scrollView.style.transitionDuration = durationValues;
+        scrollView.style.transitionTimingFunction = easingValues;
+
+        scrollView.AddToClassList(marginClass);
+        scrollView.AddToClassList(animatedClass);
+        yield return null;
+        scrollView.RemoveFromClassList(marginClass);
+        //yield return new WaitForSeconds(transitionDuration);
+        yield return new WaitForSeconds(transitionDuration);
+        scrollView.RemoveFromClassList(animatedClass);
+        LoadButtons(currentPage);
+        //Destroy(coroutineRunnerWorker.gameObject);
         
     }
+    #endregion
 
     #region OnClickEvent Listeners and their methods.
 
@@ -56,12 +108,12 @@ public class UIExample: EditorWindow
         rootVisualElement.Query<Button>(name).ForEach(action);
 
     }
-    
+
     /// <summary>
     /// Add listener function to a button called item. Which located on tutorial page.
     /// </summary>
     /// <param name="button"></param>
-    private void AddListenerItemButton(Button button) 
+    private void AddListenerItemButton(Button button)
     {
         button.clickable.clicked += ItemClicked;
     }
@@ -69,12 +121,12 @@ public class UIExample: EditorWindow
     /// Add listener to all back buttons in page
     /// </summary>
     /// <param name="button"></param>
-    private void AddListenerBackButton(Button button) 
+    private void AddListenerBackButton(Button button)
     {
         button.clickable.clicked += BackButtonClicked;
     }
 
-    private void AddListenerListItemBtn(Button button) 
+    private void AddListenerListItemBtn(Button button)
     {
         button.clickable.clicked += ListItemClicked;
     }
@@ -114,13 +166,16 @@ public class UIExample: EditorWindow
     }
     #endregion
 
+    #region Manage Visual elements
     /// <summary>
     /// Clear all pages from root visual element
     /// </summary>
-    private void ClearRootVisualElement() 
+    private void ClearRootVisualElement()
     {
         rootVisualElement.Clear();
     }
+
+
 
     /// <summary>
     /// Load new visual tree asset to the rootVisualElement. But before clear all pages
@@ -129,43 +184,68 @@ public class UIExample: EditorWindow
     private void LoadVisuals(VisualTreeAsset treeAsset) 
     {
         ClearRootVisualElement();
-        rootVisualElement.Add(treeAsset.Instantiate());
+        VisualElement templateContainer = treeAsset.Instantiate();
+        templateContainer.style.height = Length.Percent(100);
+        rootVisualElement.Add(templateContainer);
         rootVisualElement.styleSheets.Add(mutualStyle);
+        rootVisualElement.contentContainer.style.height = Length.Percent(100);
     }
 
     
 
+ 
+
+    /// <summary>
+    /// Start couroutine for transitions
+    /// </summary>
+    private void RunCouroutine()
+    {
+        EditorCoroutineUtility.StartCoroutine(PerformTransition(),this);
+    }
+
+    /// <summary>
+    /// Add events to buttons every time they are loaded
+    /// </summary>
+    /// <param name="name"></param>
+    private void LoadButtons(string name)
+    {
+        switch (name)
+        {
+            case "tutorialPage":
+                OnItemClicked = null;
+                OnItemClicked += AddListenerItemButton;
+                AddEventToButtonsByName("item", OnItemClicked);
+                break;
+            case "listPage":
+                OnItemClicked = null;
+                OnItemClicked += AddListenerListItemBtn;
+                AddEventToButtonsByName("list_item", OnItemClicked);
+                break;
+            case "videoPage":
+                OnItemClicked = null;
+                break;
+        }
+        
+        OnBackButtonClicked = null;
+        OnBackButtonClicked = AddListenerBackButton;
+        AddEventToButtonsByName("back_btn", OnBackButtonClicked);
+        AddEventToButtonsByName("menu_btn_back", OnBackButtonClicked);
+    }
+    #endregion
+
+    #region Load Each page methoods.
     /// <summary>
     /// Load first page
     /// </summary>
-    private void LoadTutorialPage() 
+    private void LoadTutorialPage()
     {
         //Add on click events to all clickable items
+
         LoadVisuals(tutorialPage);
         currentPage = "tutorialPage";
-        OnItemClicked = null;
-        OnItemClicked += AddListenerItemButton;
-        AddEventToButtonsByName("item", OnItemClicked);
-        OnBackButtonClicked = null;
-        OnBackButtonClicked = AddListenerBackButton;
-        AddEventToButtonsByName("back_btn", OnBackButtonClicked);
-        AddEventToButtonsByName("menu_btn_back", OnBackButtonClicked);
-    }
-    
-    /// <summary>
-    /// Load third page
-    /// </summary>
-    private void LoadVideoPage() 
-    {
-        LoadVisuals(videoPage);
-        currentPage = "videoPage";
-        OnItemClicked = null;
-        //OnItemClicked += AddListenerListItemBtn;
-        //AddEventToButtonsByName("list_item", OnItemClicked);
-        OnBackButtonClicked = null;
-        OnBackButtonClicked = AddListenerBackButton;
-        AddEventToButtonsByName("back_btn", OnBackButtonClicked);
-        AddEventToButtonsByName("menu_btn_back", OnBackButtonClicked);
+        RunCouroutine();
+        //ResetContent();
+
     }
 
     /// <summary>
@@ -173,32 +253,20 @@ public class UIExample: EditorWindow
     /// </summary>
     private void LoadListPage() 
     {
-        //Add on click events to all clickable items
         LoadVisuals(listPage);
         currentPage = "listPage";
-        OnItemClicked = null;
-        OnItemClicked += AddListenerListItemBtn;
-        AddEventToButtonsByName("list_item", OnItemClicked);
-        OnBackButtonClicked = null;
-        OnBackButtonClicked = AddListenerBackButton;
-        AddEventToButtonsByName("back_btn", OnBackButtonClicked);
-        AddEventToButtonsByName("menu_btn_back", OnBackButtonClicked);
+        RunCouroutine();
     }
 
-    private void Load(string name) 
+    /// <summary>
+    /// Load third page
+    /// </summary>
+    private void LoadVideoPage()
     {
-        switch (name)
-        {
-            case "tutorial_page":
-                LoadTutorialPage();
-                break;
-            case "list_page":
-                LoadListPage();
-                break;
-            case "video_page":
-                LoadVideoPage();
-                break;
-        }
+        LoadVisuals(videoPage);
+        currentPage = "videoPage";
+        RunCouroutine();
     }
-    
+
+    #endregion
 }

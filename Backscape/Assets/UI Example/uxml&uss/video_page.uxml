@@ -1,6 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Example/uxml&amp;uss/style.uss?fileID=7433441132597879392&amp;guid=7ddde310778bfbc439a83b8d2b2b2a80&amp;type=3#style" />
-    <ui:GroupBox name="container" class="container" style="width: 100%; flex-grow: 0; align-items: stretch; margin-left: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; opacity: 0.87;">
+    <ui:GroupBox name="container" class="container" style="width: 100%; flex-grow: 0; align-items: stretch; margin-left: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; opacity: 0.87; height: 100%;">
         <ui:VisualElement name="navigation_panel" class="theme navigation" style="height: 50px; min-height: auto; max-height: none; min-width: auto; max-width: none; width: 100%; flex-grow: 0; position: relative; top: auto; left: auto; flex-shrink: 1;">
             <ui:VisualElement name="control_panel" class="control_panel" style="width: 70%; height: 100%; flex-direction: row; flex-grow: 8;">
                 <ui:Button tabindex="-1" display-tooltip-when-elided="true" name="back_btn" class="back_btn" />
@@ -8,22 +8,24 @@
             </ui:VisualElement>
             <ui:VisualElement name="search_box" class="search_box" style="width: 20%; flex-direction: row-reverse; flex-grow: 2;" />
         </ui:VisualElement>
-        <ui:ScrollView scroll-deceleration-rate="0,135" elasticity="0,1" name="scrollview" style="padding-left: 30px; padding-right: 30px; padding-top: 30px; padding-bottom: 130px;">
-            <ui:VisualElement name="video_box" style="flex-basis: 50%; flex-grow: 1; flex-direction: column; width: 100%; height: 50%; align-items: center; justify-content: center; padding-left: 50px; padding-right: 50px; padding-top: 50px; padding-bottom: 50px; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; background-color: rgb(149, 149, 149); border-top-left-radius: 15px; border-bottom-left-radius: 15px; border-top-right-radius: 15px; border-bottom-right-radius: 15px;">
-                <ui:VisualElement name="play_btn" class="play_btn" style="background-image: url(&apos;project://database/Assets/UI%20Example/img/play_btn%20(2).png?fileID=2800000&amp;guid=6816377c9e4d44f4a9a27652a3b1146a&amp;type=3#play_btn (2)&apos;); width: 100px; height: 100px; left: auto; top: auto; bottom: auto;" />
-            </ui:VisualElement>
-            <ui:VisualElement name="video_question" class="video_question" style="height: auto;">
-                <ui:VisualElement name="video_question_text" class="video_question_text" style="align-items: center; width: 100%;">
-                    <ui:Label tabindex="-1" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam?" display-tooltip-when-elided="true" name="video_quetion_label" class="video_question_label" style="color: rgb(0, 0, 0); -unity-font-style: bold;" />
+        <ui:ScrollView scroll-deceleration-rate="0,135" elasticity="0,1" name="scrollview" style="padding-left: 50px; padding-right: 50px; padding-top: 50px; padding-bottom: 50px; transition-property: margin-left; transition-duration: 1s;">
+            <ui:VisualElement name="content" class="content" style="justify-content: center; flex-grow: 1; flex-basis: auto; flex-direction: row; height: auto; width: auto; align-items: stretch; background-color: rgb(255, 255, 255); opacity: 0.77; scale: 1 1;">
+                <ui:VisualElement name="video_box" style="flex-basis: 50%; flex-grow: 1; flex-direction: column; width: 100%; height: 50%; align-items: center; justify-content: center; padding-left: 50px; padding-right: 50px; padding-top: 50px; padding-bottom: 50px; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; background-color: rgb(149, 149, 149); border-top-left-radius: 15px; border-bottom-left-radius: 15px; border-top-right-radius: 15px; border-bottom-right-radius: 15px;">
+                    <ui:VisualElement name="play_btn" class="play_btn" style="background-image: url(&apos;project://database/Assets/UI%20Example/img/play_btn%20(2).png?fileID=2800000&amp;guid=6816377c9e4d44f4a9a27652a3b1146a&amp;type=3#play_btn (2)&apos;); width: 100px; height: 100px; left: auto; top: auto; bottom: auto;" />
                 </ui:VisualElement>
-                <ui:VisualElement name="video_questio_btns" class="video_question_btns">
-                    <ui:Button tabindex="-1" text="Lorem ipsum" display-tooltip-when-elided="true" name="video_question_btn" class="video_question_button" />
-                    <ui:Button tabindex="-1" text="Lorem ipsum" display-tooltip-when-elided="true" name="video_question_btn" class="video_question_button" />
-                    <ui:Button tabindex="-1" text="Lorem ipsum" display-tooltip-when-elided="true" name="video_question_btn" class="video_question_button" />
+                <ui:VisualElement name="video_question" class="video_question" style="height: auto;">
+                    <ui:VisualElement name="video_question_text" class="video_question_text" style="align-items: center; width: 100%;">
+                        <ui:Label tabindex="-1" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam?" display-tooltip-when-elided="true" name="video_quetion_label" class="video_question_label" style="color: rgb(0, 0, 0); -unity-font-style: bold;" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="video_questio_btns" class="video_question_btns">
+                        <ui:Button tabindex="-1" text="Lorem ipsum" display-tooltip-when-elided="true" name="video_question_btn" class="video_question_button" />
+                        <ui:Button tabindex="-1" text="Lorem ipsum" display-tooltip-when-elided="true" name="video_question_btn" class="video_question_button" />
+                        <ui:Button tabindex="-1" text="Lorem ipsum" display-tooltip-when-elided="true" name="video_question_btn" class="video_question_button" />
+                    </ui:VisualElement>
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:ScrollView>
-        <ui:GroupBox name="menu" class="menu theme" style="position: absolute; width: 100%; top: auto; bottom: 3px; flex-grow: 1; display: flex; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; left: -1px; flex-direction: row; justify-content: space-around;">
+        <ui:GroupBox name="menu" class="menu theme" style="position: absolute; width: 100%; top: auto; bottom: 25px; flex-grow: 1; display: flex; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; left: 0; flex-direction: row; justify-content: space-around;">
             <ui:Button tabindex="-1" display-tooltip-when-elided="true" name="menu_btn_back" class="menu_btn" style="border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; border-top-left-radius: 0; border-bottom-left-radius: 0; border-top-right-radius: 0; border-bottom-right-radius: 0; background-image: url(&apos;project://database/Assets/UI%20Example/img/back_button.png?fileID=2800000&amp;guid=bbbbb76484ce9af449e0f2e7895ccca1&amp;type=3#back_button&apos;);" />
             <ui:Button tabindex="-1" display-tooltip-when-elided="true" name="menu_btn_middle" class="menu_btn" style="border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; border-top-left-radius: 0; border-bottom-left-radius: 0; border-top-right-radius: 0; border-bottom-right-radius: 0; background-image: url(&apos;project://database/Assets/UI%20Example/img/circle_menu_btn.png?fileID=2800000&amp;guid=feccfdcdc1f86ec479cff5e571cad0b1&amp;type=3#circle_menu_btn&apos;);" />
             <ui:Button tabindex="-1" display-tooltip-when-elided="true" name="menu_btn_last" class="menu_btn" style="white-space: nowrap; -unity-text-align: middle-center; border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; border-top-left-radius: 0; border-bottom-left-radius: 0; border-top-right-radius: 0; border-bottom-right-radius: 0; background-image: url(&apos;project://database/Assets/UI%20Example/img/square_menu_btn.png?fileID=2800000&amp;guid=aeea47befedd41d459f40028e6bb67a9&amp;type=3#square_menu_btn&apos;);" />
