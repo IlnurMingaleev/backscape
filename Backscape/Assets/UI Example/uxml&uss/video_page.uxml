@@ -1,6 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Example/uxml&amp;uss/style.uss?fileID=7433441132597879392&amp;guid=7ddde310778bfbc439a83b8d2b2b2a80&amp;type=3#style" />
-    <ui:GroupBox name="container" class="container" style="width: 100%; flex-grow: 0; align-items: stretch; margin-left: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; opacity: 0.87; height: 100%; min-width: auto;">
+    <ui:GroupBox name="container" class="container" style="width: 100%; flex-grow: 0; align-items: stretch; margin-left: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; opacity: 0.87; height: 100%; min-width: auto; margin-bottom: -70px;">
         <ui:VisualElement name="navigation_panel" class="theme navigation" style="height: 50px; min-height: auto; max-height: none; min-width: auto; max-width: none; width: 100%; flex-grow: 0; position: relative; top: auto; left: auto; flex-shrink: 1;">
             <ui:VisualElement name="control_panel" class="control_panel" style="width: 70%; height: 100%; flex-direction: row; flex-grow: 8;">
                 <ui:Button tabindex="-1" display-tooltip-when-elided="true" name="back_btn" class="back_btn" />
